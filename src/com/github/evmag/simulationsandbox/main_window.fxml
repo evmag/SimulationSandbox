@@ -1,8 +1,22 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<GridPane fx:controller="sample.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.layout.StackPane?>
+<BorderPane fx:controller="com.github.evmag.simulationsandbox.MainWindowController"
+            xmlns:fx="http://javafx.com/fxml" style="-fx-background-color: white">
+    <top>
+<!--        Menu placeholder -->
+
+    </top>
+    <center>
+<!--        Drawing canvas -->
+        <StackPane fx:id="canvasStackPane" style="-fx-background-color: yellow">
+            <Canvas fx:id="simulationCanvas"></Canvas>
+        </StackPane>
+
+    </center>
+    <right>
+<!--        Configuration placeholder -->
+<!--        <StackPane minWidth="100" style="-fx-background-color: green"><Label text="Test"/></StackPane>-->
+    </right>
+</BorderPane>
