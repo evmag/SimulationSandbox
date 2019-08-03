@@ -42,15 +42,31 @@ public class SimulationCanvas {
         g.fillRect(0, 0, width, height);
     }
 
-    public void drawLine(double x1, double y1, double x2, double y2, Color color) {
+    public void setStrokeColor(Color color) {
         g.setStroke(color);
+    }
+
+    public void setFillColor(Color color) {
+        g.setFill(color);
+    }
+
+    public void drawLine(double x1, double y1, double x2, double y2) {
         g.strokeLine(x1, y1, x2, y2);
     }
 
-    public void drawFilledRect(double x1, double y1, double width, double height, Color color) {
-        g.setStroke(color);
-        g.setFill(color);
+    public void drawLine(double x1, double y1, double x2, double y2, Color color) {
+        setStrokeColor(color);
+        drawLine(x1, y1, x2, y2);
+    }
+
+    public void drawFilledRect(double x1, double y1, double width, double height) {
         g.fillRect(x1, y1, width, height);
+    }
+
+    public void drawFilledRect(double x1, double y1, double width, double height, Color color) {
+        setStrokeColor(color);
+        setFillColor(color);
+        drawFilledRect(x1, y1, width, height);
     }
 
     public double getWidth() {

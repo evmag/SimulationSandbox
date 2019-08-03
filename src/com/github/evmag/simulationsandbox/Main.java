@@ -1,5 +1,6 @@
 package com.github.evmag.simulationsandbox;
 
+import com.github.evmag.simulationsandbox.simulations.gameoflife.GameOfLifeMain;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +18,8 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
-        simulationThread = new SimulationThread();
+        GameOfLifeMain gol = new GameOfLifeMain(50,50);
+        simulationThread = new SimulationThread(gol);
         new Thread(simulationThread).start();
 
     }

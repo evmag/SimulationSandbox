@@ -1,5 +1,7 @@
 package com.github.evmag.simulationsandbox;
 
+import com.github.evmag.simulationsandbox.simulations.Simulation;
+import javafx.application.Platform;
 import javafx.scene.paint.Color;
 
 public class SimulationThread extends Thread implements Runnable{
@@ -7,9 +9,13 @@ public class SimulationThread extends Thread implements Runnable{
     private int ups; // Updates per second
     private int counter = 0; // temporary way to stop the thread while testing TODO(EM): remove
 
-    public SimulationThread() {
+    private Simulation simulation;
+
+    public SimulationThread(Simulation simulation) {
         this.running = true;
         this.ups = 2;
+
+        this.simulation = simulation;
     }
 
     @Override
@@ -17,6 +23,9 @@ public class SimulationThread extends Thread implements Runnable{
 
         // Initialize canvas wrapper
         SimulationCanvas.getInstance().initialize();
+
+        // Initialize simulation
+        simulation.initialize();
 
         // Main loop
         long targetLoopTimeMillis = 1000L / ups;
@@ -45,19 +54,27 @@ public class SimulationThread extends Thread implements Runnable{
     }
 
     private void update() {
-        if (counter++ > 10) {
+        simulation.update();
+        if (counter++ > 100) {
             running = false;
         }
 //        System.out.println("Update called.");
     }
 
     private void render() {
-        SimulationCanvas.getInstance().clear(Color.LIGHTGRAY);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                SimulationCanvas.getInstance().clear(Color.LIGHTGRAY);
+                simulation.render();
+            }
+        });
+
 
         // Test code for SimulationCanvas TODO(EM): remove
-        SimulationCanvas.getInstance().drawLine(10, 10, 200, 200, Color.RED);
-        SimulationCanvas.getInstance().drawLine(200, 10, 10, 200, Color.RED);
-        SimulationCanvas.getInstance().drawFilledRect(10, 200, 190, 100, Color.BLUE);
+//        SimulationCanvas.getInstance().drawLine(10, 10, 200, 200, Color.RED);
+//        SimulationCanvas.getInstance().drawLine(200, 10, 10, 200, Color.RED);
+//        SimulationCanvas.getInstance().drawFilledRect(10, 200, 190, 100, Color.BLUE);
 //        System.out.println("Render called.");
     }
 }
