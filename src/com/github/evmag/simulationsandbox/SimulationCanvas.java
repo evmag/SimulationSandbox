@@ -23,7 +23,6 @@ public class SimulationCanvas {
 
     public void setGraphicsContext(GraphicsContext g) {
         this.g = g;
-
     }
 
     public void initialize() {

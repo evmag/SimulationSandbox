@@ -13,7 +13,7 @@ public class SimulationThread extends Thread implements Runnable{
 
     public SimulationThread(Simulation simulation) {
         this.running = true;
-        this.ups = 2;
+        this.ups = 1;
 
         this.simulation = simulation;
     }
@@ -41,12 +41,13 @@ public class SimulationThread extends Thread implements Runnable{
             endTime = System.nanoTime();
             deltaTimeMillis = (endTime - startTime) / 1000L;
 
-            if (deltaTimeMillis < targetLoopTimeMillis) {
+            while (deltaTimeMillis < targetLoopTimeMillis) {
                 try {
                     Thread.sleep(targetLoopTimeMillis - deltaTimeMillis);
                 } catch (InterruptedException e) {
                     // TODO(EM): handle exception
                 }
+                deltaTimeMillis = (System.nanoTime() - startTime) / 1000L;
             }
 
         }
