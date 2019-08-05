@@ -189,6 +189,7 @@ public class GameOfLifeMain extends Simulation {
 
     @Override
     public void render() {
+//        simCanvas.clear(Color.LIGHTGRAY);
         drawCells();
         drawGridLines();
     }

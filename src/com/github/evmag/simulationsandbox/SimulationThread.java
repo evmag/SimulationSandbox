@@ -13,7 +13,7 @@ public class SimulationThread extends Thread implements Runnable{
 
     public SimulationThread(Simulation simulation) {
         this.running = true;
-        this.ups = 1;
+        this.ups = 5;
 
         this.simulation = simulation;
     }
@@ -32,14 +32,14 @@ public class SimulationThread extends Thread implements Runnable{
         long startTime;
         long endTime;
         long deltaTimeMillis;
+        double currUps;
         while (running) {
             startTime = System.nanoTime();
 
             update();
             render();
 
-            endTime = System.nanoTime();
-            deltaTimeMillis = (endTime - startTime) / 1000L;
+            deltaTimeMillis = (System.nanoTime() - startTime) / 1_000_000L;
 
             while (deltaTimeMillis < targetLoopTimeMillis) {
                 try {
@@ -49,7 +49,9 @@ public class SimulationThread extends Thread implements Runnable{
                 }
                 deltaTimeMillis = (System.nanoTime() - startTime) / 1000L;
             }
-
+            endTime = System.nanoTime();
+//            currUps = 1.0E9/(endTime - startTime);
+//            System.out.println("Current UPS: " + currUps);
         }
 
     }

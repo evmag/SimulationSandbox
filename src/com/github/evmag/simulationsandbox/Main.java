@@ -1,6 +1,7 @@
 package com.github.evmag.simulationsandbox;
 
 import com.github.evmag.simulationsandbox.simulations.gameoflife.GameOfLifeMain;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,7 +23,17 @@ public class Main extends Application {
         simulationThread = new SimulationThread(gol);
         new Thread(simulationThread).start();
 
+        // Testing of having canvas drawing in UI thread using AnimationTimer
+//        AnimationTimer canvasDrawing = new AnimationTimer() {
+//            @Override
+//            public void handle(long l) {
+//                gol.render();
+//            }
+//        };
+//        canvasDrawing.start();
+
     }
+
 
 
     public static void main(String[] args) {
