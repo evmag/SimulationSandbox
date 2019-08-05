@@ -13,7 +13,7 @@ public class SimulationThread extends Thread implements Runnable{
 
     public SimulationThread(Simulation simulation) {
         this.running = true;
-        this.ups = 5;
+        this.ups = 1;
 
         this.simulation = simulation;
     }
@@ -56,11 +56,12 @@ public class SimulationThread extends Thread implements Runnable{
 
     }
 
+    public void exit() {
+        running = false;
+    }
+
     private void update() {
         simulation.update();
-        if (counter++ > 100) {
-            running = false;
-        }
 //        System.out.println("Update called.");
     }
 
@@ -72,7 +73,6 @@ public class SimulationThread extends Thread implements Runnable{
                 simulation.render();
             }
         });
-
 
         // Test code for SimulationCanvas TODO(EM): remove
 //        SimulationCanvas.getInstance().drawLine(10, 10, 200, 200, Color.RED);
