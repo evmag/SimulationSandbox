@@ -7,7 +7,6 @@ import javafx.scene.paint.Color;
 public class SimulationThread extends Thread implements Runnable{
     private boolean running;
     private int ups; // Updates per second
-    private int counter = 0; // temporary way to stop the thread while testing TODO(EM): remove
 
     private Simulation simulation;
 

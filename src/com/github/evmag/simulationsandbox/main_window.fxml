@@ -2,6 +2,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
 <BorderPane fx:controller="com.github.evmag.simulationsandbox.MainWindowController"
             xmlns:fx="http://javafx.com/fxml" style="-fx-background-color: white">
     <top>
@@ -19,4 +21,11 @@
 <!--        Configuration placeholder -->
 <!--        <StackPane minWidth="100" style="-fx-background-color: green"><Label text="Test"/></StackPane>-->
     </right>
+    <bottom>
+        <HBox>
+            <Button text="Start"/>
+            <Button text="Pause"/>
+            <Button text="Stop" />
+        </HBox>
+    </bottom>
 </BorderPane>
