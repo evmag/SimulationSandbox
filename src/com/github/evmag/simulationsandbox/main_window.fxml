@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToggleButton?>
 <BorderPane fx:controller="com.github.evmag.simulationsandbox.MainWindowController"
             xmlns:fx="http://javafx.com/fxml" style="-fx-background-color: white">
     <top>
@@ -24,7 +25,7 @@
     <bottom>
         <HBox>
             <Button text="Start"/>
-            <Button text="Pause"/>
+            <ToggleButton fx:id="pauseButton" text="Pause" onAction="#handlePauseButton"/>
             <Button text="Stop" />
         </HBox>
     </bottom>

@@ -2,6 +2,7 @@ package com.github.evmag.simulationsandbox;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
@@ -10,6 +11,8 @@ public class MainWindowController {
     private Canvas simulationCanvas;
     @FXML
     private StackPane canvasStackPane;
+    @FXML
+    private ToggleButton pauseButton;
 
     @FXML
     public void initialize() {
@@ -19,6 +22,11 @@ public class MainWindowController {
         SimulationCanvas.getInstance().setGraphicsContext(simulationCanvas.getGraphicsContext2D());
 
 
+    }
+
+    @FXML
+    private void handlePauseButton() {
+        SimulationThread.getInstance().setPaused(pauseButton.isSelected());
     }
 
 }

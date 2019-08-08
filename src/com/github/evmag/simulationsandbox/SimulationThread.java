@@ -5,16 +5,24 @@ import javafx.application.Platform;
 import javafx.scene.paint.Color;
 
 public class SimulationThread extends Thread implements Runnable{
+    private static SimulationThread instance;
     private boolean running;
+    private boolean paused;
     private int ups; // Updates per second
 
     private Simulation simulation;
 
     public SimulationThread(Simulation simulation) {
         this.running = true;
+        this.paused = false;
         this.ups = 1;
 
         this.simulation = simulation;
+        instance = this;
+    }
+
+    public static SimulationThread getInstance() {
+        return instance; // TODO(EM): Handle case where instance is null
     }
 
     @Override
@@ -35,7 +43,9 @@ public class SimulationThread extends Thread implements Runnable{
         while (running) {
             startTime = System.nanoTime();
 
-            update();
+            if (!paused) {
+                update();
+            }
             render();
 
             deltaTimeMillis = (System.nanoTime() - startTime) / 1_000_000L;
@@ -78,5 +88,9 @@ public class SimulationThread extends Thread implements Runnable{
 //        SimulationCanvas.getInstance().drawLine(200, 10, 10, 200, Color.RED);
 //        SimulationCanvas.getInstance().drawFilledRect(10, 200, 190, 100, Color.BLUE);
 //        System.out.println("Render called.");
+    }
+
+    public void setPaused(boolean paused) {
+        this.paused = paused;
     }
 }
