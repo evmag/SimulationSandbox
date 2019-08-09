@@ -1,7 +1,5 @@
 package com.github.evmag.simulationsandbox;
 
-import com.github.evmag.simulationsandbox.simulations.gameoflife.GameOfLifeMain;
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,7 +19,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.setResizable(false);
         primaryStage.show();
-        mainWindowController.initializeThread();
+//        mainWindowController.initializeThread();
 
 //        GameOfLifeMain gol = new GameOfLifeMain(50,50);
 //        simulationThread = new SimulationThread(gol);
@@ -41,7 +39,7 @@ public class Main extends Application {
     @Override
     public void stop() throws Exception {
         super.stop();
-        mainWindowController.stop();
+        mainWindowController.stopThread();
 //        simulationThread.exit();
     }
 

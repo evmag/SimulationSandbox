@@ -13,7 +13,7 @@
     </top>
     <center>
 <!--        Drawing canvas -->
-        <StackPane fx:id="canvasStackPane" style="-fx-background-color: yellow">
+        <StackPane fx:id="canvasStackPane" style="-fx-background-color: lightyellow">
             <Canvas fx:id="simulationCanvas"></Canvas>
         </StackPane>
 
@@ -24,9 +24,9 @@
     </right>
     <bottom>
         <HBox>
-            <Button text="Start"/>
-            <ToggleButton fx:id="pauseButton" text="Pause" onAction="#handlePauseButton"/>
-            <Button text="Stop" />
+            <Button fx:id="startButton" text="Start" onAction="#handleControlButtons"/>
+            <ToggleButton fx:id="pauseButton" text="Pause" onAction="#handleControlButtons" disable="true"/>
+            <Button fx:id="stopButton" text="Stop" onAction="#handleControlButtons" disable="true"/>
         </HBox>
     </bottom>
 </BorderPane>
