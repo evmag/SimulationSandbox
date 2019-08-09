@@ -1,5 +1,6 @@
 package com.github.evmag.simulationsandbox;
 
+import com.github.evmag.simulationsandbox.simulations.gameoflife.GameOfLifeMain;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ToggleButton;
@@ -14,6 +15,8 @@ public class MainWindowController {
     @FXML
     private ToggleButton pauseButton;
 
+    private SimulationThread simulationThread;
+
     @FXML
     public void initialize() {
 
@@ -24,9 +27,22 @@ public class MainWindowController {
 
     }
 
+    public void initializeThread() {
+        GameOfLifeMain gol = new GameOfLifeMain(50,50);
+        simulationThread = new SimulationThread(gol);
+        new Thread(simulationThread).start();
+    }
+
+
+    public void stop() {
+        simulationThread.exit();
+    }
+
     @FXML
     private void handlePauseButton() {
-        SimulationThread.getInstance().setPaused(pauseButton.isSelected());
+        simulationThread.setPaused(pauseButton.isSelected());
     }
+
+
 
 }
