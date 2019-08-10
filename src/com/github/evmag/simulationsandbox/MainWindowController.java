@@ -1,11 +1,13 @@
 package com.github.evmag.simulationsandbox;
 
 import com.github.evmag.simulationsandbox.simulations.gameoflife.GameOfLifeMain;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.StackPane;
 
@@ -41,7 +43,9 @@ public class MainWindowController {
 
 
     public void stopThread() {
-        simulationThread.exit();
+        if (simulationThread != null) {
+            simulationThread.exit();
+        }
     }
 
     @FXML
@@ -67,6 +71,16 @@ public class MainWindowController {
                 break;
         }
 
+    }
+
+    @FXML
+    private void handleFileMenu(ActionEvent e) {
+        String sourceId = ((MenuItem) e.getSource()).getId();
+        switch (sourceId) {
+            case "menuItemExit":
+                Platform.exit();
+                break;
+        }
     }
 
 

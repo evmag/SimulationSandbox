@@ -14,7 +14,7 @@
 <!--        Menu placeholder -->
         <MenuBar>
             <Menu text="File">
-                <MenuItem text="Exit"/>
+                <MenuItem fx:id="menuItemExit" text="Exit" onAction="#handleFileMenu"/>
             </Menu>
             <Menu text="Simulations">
                 <MenuItem text="Game of life"/>
