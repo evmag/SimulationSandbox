@@ -9,13 +9,14 @@ public class SimulationThread extends Thread implements Runnable{
     private boolean running;
     private boolean paused;
     private int ups; // Updates per second
+    private long targetLoopTimeMillis; // Time in milliseconds per loop iteration for target UPS
 
     private Simulation simulation;
 
     public SimulationThread(Simulation simulation) {
         this.running = true;
         this.paused = false;
-        this.ups = 1;
+        this.setUPS(1);
 
         this.simulation = simulation;
         instance = this;
@@ -35,7 +36,7 @@ public class SimulationThread extends Thread implements Runnable{
         simulation.initialize();
 
         // Main loop
-        long targetLoopTimeMillis = 1000L / ups;
+//        long targetLoopTimeMillis = 1000L / ups;
         long startTime;
         long endTime;
         long deltaTimeMillis;
@@ -67,6 +68,11 @@ public class SimulationThread extends Thread implements Runnable{
 
     public void exit() {
         running = false;
+    }
+
+    public void setUPS(int ups) {
+        this.ups = ups;
+        this.targetLoopTimeMillis = 1000L / ups;
     }
 
     private void update() {
