@@ -2,13 +2,12 @@ package com.github.evmag.simulationsandbox;
 
 import com.github.evmag.simulationsandbox.simulations.gameoflife.GameOfLifeMain;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
-import javafx.scene.control.Control;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 
 public class MainWindowController {
@@ -22,6 +21,8 @@ public class MainWindowController {
     private ToggleButton pauseButton;
     @FXML
     private Button stopButton;
+    @FXML
+    private Slider upsSlider;
 
     private SimulationThread simulationThread;
 
@@ -32,12 +33,21 @@ public class MainWindowController {
         simulationCanvas.heightProperty().bind(canvasStackPane.heightProperty());
         SimulationCanvas.getInstance().setGraphicsContext(simulationCanvas.getGraphicsContext2D());
 
+        upsSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
+                if (simulationThread != null) {
+                    simulationThread.setUPS(newValue.intValue());
+                }
+            }
+        });
 
     }
 
     public void initializeThread() {
         GameOfLifeMain gol = new GameOfLifeMain(50,50);
         simulationThread = new SimulationThread(gol);
+        simulationThread.setUPS((int) upsSlider.getValue());
         new Thread(simulationThread).start();
     }
 
@@ -45,6 +55,7 @@ public class MainWindowController {
     public void stopThread() {
         if (simulationThread != null) {
             simulationThread.exit();
+            simulationThread = null;
         }
     }
 
