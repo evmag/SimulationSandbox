@@ -6,9 +6,14 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+
+import java.io.IOException;
 
 public class MainWindowController {
     @FXML
@@ -23,6 +28,8 @@ public class MainWindowController {
     private Button stopButton;
     @FXML
     private Slider upsSlider;
+    @FXML
+    private VBox settingsPane;
 
     private SimulationThread simulationThread;
 
@@ -46,7 +53,7 @@ public class MainWindowController {
 
     public void initializeThread() {
         GameOfLifeMain gol = new GameOfLifeMain(50,50);
-        simulationThread = new SimulationThread(gol);
+        simulationThread = new SimulationThread(gol, this);
         simulationThread.setUPS((int) upsSlider.getValue());
         new Thread(simulationThread).start();
     }
@@ -57,6 +64,15 @@ public class MainWindowController {
             simulationThread.exit();
             simulationThread = null;
         }
+    }
+
+    public void setSettingsPane(FXMLLoader fxmlLoader) {
+        try {
+            settingsPane.getChildren().setAll((Node) fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace(); // TODO: handle exception
+        }
+
     }
 
     @FXML

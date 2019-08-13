@@ -2,8 +2,10 @@ package com.github.evmag.simulationsandbox.simulations.gameoflife;
 
 import com.github.evmag.simulationsandbox.SimulationCanvas;
 import com.github.evmag.simulationsandbox.simulations.Simulation;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.paint.Color;
 
+import java.net.URL;
 import java.util.Random;
 
 public class GameOfLifeMain extends Simulation {
@@ -192,5 +194,11 @@ public class GameOfLifeMain extends Simulation {
 //        simCanvas.clear(Color.LIGHTGRAY);
         drawCells();
         drawGridLines();
+    }
+
+    @Override
+    public FXMLLoader getSettingsFXMLLoader() {
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass.getResourse("/simulations/gameoflife/game_of_life_settings_panel.fxml"));
+        return null;
     }
 }

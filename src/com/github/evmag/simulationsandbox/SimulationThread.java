@@ -2,6 +2,7 @@ package com.github.evmag.simulationsandbox;
 
 import com.github.evmag.simulationsandbox.simulations.Simulation;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.paint.Color;
 
 public class SimulationThread extends Thread implements Runnable{
@@ -11,13 +12,16 @@ public class SimulationThread extends Thread implements Runnable{
     private long targetLoopTimeMillis; // Time in milliseconds per loop iteration for target UPS
 
     private Simulation simulation;
+    private MainWindowController mainWindowController;
 
-    public SimulationThread(Simulation simulation) {
+    public SimulationThread(Simulation simulation, MainWindowController mainWindowController) {
         this.running = true;
         this.paused = false;
         this.setUPS(1);
 
         this.simulation = simulation;
+        this.mainWindowController = mainWindowController; // TODO: handle this elsewhere?
+        mainWindowController.setSettingsPane(new FXMLLoader(getClass().getResource("game_of_life_settings_panel.fxml"))); //TODO: Fix getting loader from simulation
     }
 
     @Override
