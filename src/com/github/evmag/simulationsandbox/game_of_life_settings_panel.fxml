@@ -4,9 +4,30 @@
 
 <?import javafx.scene.control.Label?>
 <!--TODO: move to the correct folder-->
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ColorPicker?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.github.evmag.simulationsandbox.GoLSettingsPanelController">
     <Label text="GoL settings"/>
+    <GridPane vgap="10" hgap="10">
+        <Label text="# of rows" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="# of colums" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Cell color" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <ColorPicker GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Grid lines color" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <ColorPicker GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+        <CheckBox text="Wrap on edges" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2"/>
+
+        <CheckBox text="Draw grid lines" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" selected="true"/>
+    </GridPane>
 
 </VBox>

@@ -15,7 +15,7 @@ public class Main extends Application {
         Parent root = fxmlLoader.load();
         mainWindowController = (MainWindowController) fxmlLoader.getController();
         primaryStage.setTitle("Simulation Sandbox");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setScene(new Scene(root, 1000, 800));
         primaryStage.setResizable(false);
         primaryStage.show();
 
