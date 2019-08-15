@@ -48,22 +48,19 @@ public class MainWindowController {
                 }
             }
         });
-
+        GameOfLifeMain gol = new GameOfLifeMain(50,50);
+        simulationThread = new SimulationThread(this);
+        simulationThread.setSimulation(gol);
+        simulationThread.setUPS((int) upsSlider.getValue());
     }
 
     public void initializeThread() {
-        GameOfLifeMain gol = new GameOfLifeMain(50,50);
-        simulationThread = new SimulationThread(gol, this);
-        simulationThread.setUPS((int) upsSlider.getValue());
-        new Thread(simulationThread).start();
+        simulationThread.startThread();
     }
 
 
     public void stopThread() {
-        if (simulationThread != null) {
-            simulationThread.exit();
-            simulationThread = null;
-        }
+        simulationThread.exit();
     }
 
     public void setSettingsPane(FXMLLoader fxmlLoader) {

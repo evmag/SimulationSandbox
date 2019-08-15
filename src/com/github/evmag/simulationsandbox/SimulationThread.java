@@ -14,14 +14,23 @@ public class SimulationThread extends Thread implements Runnable{
     private Simulation simulation;
     private MainWindowController mainWindowController;
 
-    public SimulationThread(Simulation simulation, MainWindowController mainWindowController) {
-        this.running = true;
+    public SimulationThread(MainWindowController mainWindowController) {
+        this.running = false;
         this.paused = false;
-        this.setUPS(1);
 
         this.simulation = simulation;
         this.mainWindowController = mainWindowController; // TODO: handle this elsewhere?
-        mainWindowController.setSettingsPane(new FXMLLoader(getClass().getResource("game_of_life_settings_panel.fxml"))); //TODO: Fix getting loader from simulation
+    }
+
+    public void startThread() {
+        if (running) {
+            System.out.println("Thread is already running..."); // TODO: handle this exception
+            return;
+        }
+
+        running = true;
+        paused = false;
+        new Thread(this).start();
     }
 
     @Override
@@ -67,11 +76,6 @@ public class SimulationThread extends Thread implements Runnable{
         running = false;
     }
 
-    public void setUPS(int ups) {
-        this.ups = ups;
-        this.targetLoopTimeMillis = 1000L / ups;
-    }
-
     private void update() {
         simulation.update();
     }
@@ -88,5 +92,15 @@ public class SimulationThread extends Thread implements Runnable{
 
     public void setPaused(boolean paused) {
         this.paused = paused;
+    }
+
+    public void setSimulation(Simulation simulation) {
+        this.simulation = simulation;
+        mainWindowController.setSettingsPane(new FXMLLoader(getClass().getResource("game_of_life_settings_panel.fxml"))); //TODO: Fix getting loader from simulation
+    }
+
+    public void setUPS(int ups) {
+        this.ups = ups;
+        this.targetLoopTimeMillis = 1000L / ups;
     }
 }
