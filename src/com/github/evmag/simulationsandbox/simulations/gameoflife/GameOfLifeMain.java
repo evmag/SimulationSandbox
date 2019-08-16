@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.Random;
 
 public class GameOfLifeMain extends Simulation {
+    private static GameOfLifeMain currInstance;
     private final int GAP_FROM_EDGES = 10;
     private final SimulationCanvas simCanvas = SimulationCanvas.getInstance();
 
@@ -19,9 +20,15 @@ public class GameOfLifeMain extends Simulation {
     private boolean[][] currentGen;
     private boolean[][] nextGen;
 
+    private Color gridColor;
+    private Color cellColor;
+
     public GameOfLifeMain(int gridWidth, int gridHeight) {
         this.gridWidth = gridWidth;
         this.gridHeight = gridHeight;
+        gridColor = Color.BLACK;
+        cellColor = Color.BLUE;
+        currInstance = this;
     }
 
     @Override
@@ -39,7 +46,8 @@ public class GameOfLifeMain extends Simulation {
     }
 
     private void drawGridLines() {
-        simCanvas.setStrokeColor(Color.BLACK);
+//        simCanvas.setStrokeColor(Color.BLACK);
+        simCanvas.setStrokeColor(gridColor);
         // Draw vertical lines
         double y1 = GAP_FROM_EDGES;
         double y2 = y1 + gridHeight * cellSize;
@@ -60,7 +68,8 @@ public class GameOfLifeMain extends Simulation {
     }
 
     private void drawCells() {
-        simCanvas.setFillColor(Color.BLUE);
+//        simCanvas.setFillColor(Color.BLUE);
+        simCanvas.setFillColor(cellColor);
         double xStart = GAP_FROM_EDGES;
         double yStart = GAP_FROM_EDGES;
         double x, y;
@@ -181,6 +190,18 @@ public class GameOfLifeMain extends Simulation {
         }
 
         return liveNeighbours;
+    }
+
+    public void setCellColor(Color color) {
+        cellColor = color;
+    }
+
+    public void setGridColor(Color color) {
+        gridColor = color;
+    }
+
+    public static GameOfLifeMain getCurrInstance() {
+        return currInstance;
     }
 
     @Override

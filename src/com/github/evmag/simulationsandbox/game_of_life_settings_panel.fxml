@@ -20,10 +20,10 @@
         <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
         <Label text="Cell color" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-        <ColorPicker GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <ColorPicker fx:id="cellColor" GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#setColor"/>
 
         <Label text="Grid lines color" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-        <ColorPicker GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <ColorPicker fx:id="gridColor" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#setColor"/>
 
         <CheckBox text="Wrap on edges" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2"/>
 
