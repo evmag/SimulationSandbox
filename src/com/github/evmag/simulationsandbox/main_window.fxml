@@ -27,7 +27,7 @@
     <center>
 <!--        Drawing canvas -->
         <StackPane fx:id="canvasStackPane" style="-fx-background-color: lightyellow">
-            <Canvas fx:id="simulationCanvas"></Canvas>
+            <Canvas fx:id="simulationCanvas"/>
         </StackPane>
 
     </center>

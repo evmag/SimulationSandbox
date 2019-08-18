@@ -18,7 +18,6 @@ public class SimulationThread extends Thread implements Runnable{
         this.running = false;
         this.paused = false;
 
-        this.simulation = simulation;
         this.mainWindowController = mainWindowController; // TODO: handle this elsewhere?
     }
 
@@ -81,12 +80,9 @@ public class SimulationThread extends Thread implements Runnable{
     }
 
     private void render() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                SimulationCanvas.getInstance().clear(Color.LIGHTGRAY);
-                simulation.render();
-            }
+        Platform.runLater(() -> {
+            SimulationCanvas.getInstance().clear(Color.LIGHTGRAY);
+            simulation.render();
         });
     }
 

@@ -40,12 +40,9 @@ public class MainWindowController {
         simulationCanvas.heightProperty().bind(canvasStackPane.heightProperty());
         SimulationCanvas.getInstance().setGraphicsContext(simulationCanvas.getGraphicsContext2D());
 
-        upsSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-                if (simulationThread != null) {
-                    simulationThread.setUPS(newValue.intValue());
-                }
+        upsSlider.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (simulationThread != null) {
+                simulationThread.setUPS(newValue.intValue());
             }
         });
         GameOfLifeMain gol = new GameOfLifeMain(50,50);

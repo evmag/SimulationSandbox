@@ -1,6 +1,5 @@
 package com.github.evmag.simulationsandbox;
 
-import com.github.evmag.simulationsandbox.simulations.Simulation;
 import com.github.evmag.simulationsandbox.simulations.gameoflife.GameOfLifeMain;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
