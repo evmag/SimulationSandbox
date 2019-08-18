@@ -22,6 +22,7 @@ public class GameOfLifeMain extends Simulation {
 
     private Color gridColor;
     private Color cellColor;
+    private boolean drawGridLines = true;
 
     public GameOfLifeMain(int gridWidth, int gridHeight) {
         this.gridWidth = gridWidth;
@@ -200,6 +201,10 @@ public class GameOfLifeMain extends Simulation {
         gridColor = color;
     }
 
+    public void setDrawGridLines(boolean drawGridLines) {
+        this.drawGridLines = drawGridLines;
+    }
+
     public static GameOfLifeMain getCurrInstance() {
         return currInstance;
     }
@@ -214,7 +219,10 @@ public class GameOfLifeMain extends Simulation {
     public void render() {
 //        simCanvas.clear(Color.LIGHTGRAY);
         drawCells();
-        drawGridLines();
+        if (drawGridLines) {
+            drawGridLines();
+        }
+
     }
 
     @Override

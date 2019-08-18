@@ -25,9 +25,9 @@
         <Label text="Grid lines color" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
         <ColorPicker fx:id="gridColor" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#setColor"/>
 
-        <CheckBox text="Wrap on edges" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2"/>
+        <CheckBox fx:id="wrapOnEdges" text="Wrap on edges" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2"/>
 
-        <CheckBox text="Draw grid lines" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" selected="true"/>
+        <CheckBox fx:id="drawGridLines" text="Draw grid lines" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" selected="true" onAction="#setBooleanSettings"/>
     </GridPane>
 
 </VBox>
