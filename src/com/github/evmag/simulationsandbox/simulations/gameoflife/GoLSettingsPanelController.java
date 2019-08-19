@@ -1,4 +1,4 @@
-package com.github.evmag.simulationsandbox;
+package com.github.evmag.simulationsandbox.simulations.gameoflife;
 
 import com.github.evmag.simulationsandbox.simulations.gameoflife.GameOfLifeMain;
 import javafx.event.ActionEvent;
@@ -7,7 +7,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Control;
 
-//TODO: Move to the correct package
 public class GoLSettingsPanelController {
     private GameOfLifeMain gameOfLifeMainSimulation;
 

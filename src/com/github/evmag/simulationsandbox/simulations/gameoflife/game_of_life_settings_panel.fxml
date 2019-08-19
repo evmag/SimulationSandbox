@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Label?>
-<!--TODO: move to the correct folder-->
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ColorPicker?>
+
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.github.evmag.simulationsandbox.GoLSettingsPanelController">
+      fx:controller="com.github.evmag.simulationsandbox.simulations.gameoflife.GoLSettingsPanelController">
     <Label text="GoL settings"/>
     <GridPane vgap="10" hgap="10">
         <Label text="# of rows" GridPane.columnIndex="0" GridPane.rowIndex="0"/>

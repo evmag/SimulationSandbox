@@ -227,7 +227,9 @@ public class GameOfLifeMain extends Simulation {
 
     @Override
     public FXMLLoader getSettingsFXMLLoader() {
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass.getResourse("/simulations/gameoflife/game_of_life_settings_panel.fxml"));
-        return null;
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        URL loaderLocation = getClass().getResource("game_of_life_settings_panel.fxml");
+        fxmlLoader.setLocation(loaderLocation);
+        return fxmlLoader;
     }
 }

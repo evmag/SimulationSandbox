@@ -5,6 +5,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.paint.Color;
 
+import java.net.URL;
+
 public class SimulationThread extends Thread implements Runnable{
     private boolean running;
     private boolean paused;
@@ -92,7 +94,7 @@ public class SimulationThread extends Thread implements Runnable{
 
     public void setSimulation(Simulation simulation) {
         this.simulation = simulation;
-        mainWindowController.setSettingsPane(new FXMLLoader(getClass().getResource("game_of_life_settings_panel.fxml"))); //TODO: Fix getting loader from simulation
+        mainWindowController.setSettingsPane(simulation.getSettingsFXMLLoader());
     }
 
     public void setUPS(int ups) {
