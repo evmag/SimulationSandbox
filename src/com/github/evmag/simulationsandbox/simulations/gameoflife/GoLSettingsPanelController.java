@@ -45,6 +45,7 @@ public class GoLSettingsPanelController {
                 gameOfLifeMainSimulation.setDrawGridLines(drawGridLines.isSelected());
                 break;
             case "wrapOnEdges":
+                gameOfLifeMainSimulation.setWrapOnEdges(wrapOnEdges.isSelected());
                 break;
         }
     }

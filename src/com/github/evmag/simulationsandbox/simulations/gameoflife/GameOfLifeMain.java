@@ -22,6 +22,7 @@ public class GameOfLifeMain extends Simulation {
 
     private Color gridColor;
     private Color cellColor;
+    private boolean wrapOnEdges = false;
     private boolean drawGridLines = true;
 
     public GameOfLifeMain(int gridWidth, int gridHeight) {
@@ -141,50 +142,56 @@ public class GameOfLifeMain extends Simulation {
     }
 
     private int getLiveNeighbours(int i, int j) {
+        // TODO: Create unit test
         int liveNeighbours = 0;
 
-        // Check 8 neighbours - no wrapping
+        int iMinus1 = (i > 0) ? i - 1 : gridWidth - 1;
+        int iPlus1 = (i < gridWidth - 1) ? i + 1 : 0;
+        int jMinus1 = (j > 0) ? j - 1 : gridWidth - 1;
+        int jPlus1 = (j < gridWidth - 1) ? j + 1 : 0;
+
+        // Check 8 neighbours
         // Check (-1, -1), (-1, 0), (-1, +1)
-        if (i > 0) {
-            if (j > 0) {
-                if (currentGen[i-1][j-1]) {
+        if (wrapOnEdges || (i > 0)) {
+            if (wrapOnEdges || (j > 0)) {
+                if (currentGen[iMinus1][jMinus1]) {
                     liveNeighbours++;
                 }
             }
-            if (currentGen[i-1][j]) {
+            if (currentGen[iMinus1][j]) {
                 liveNeighbours++;
             }
-            if (j < gridHeight - 1) {
-                if (currentGen[i-1][j+1]) {
+            if (wrapOnEdges || (j < gridHeight - 1)) {
+                if (currentGen[iMinus1][jPlus1]) {
                     liveNeighbours++;
                 }
             }
         }
 
         // Check (0, -1), (0, +1)
-        if (j > 0) {
-            if (currentGen[i][j-1]) {
+        if (wrapOnEdges || (j > 0)) {
+            if (currentGen[i][jMinus1]) {
                 liveNeighbours++;
             }
         }
-        if (j < gridHeight - 1) {
-            if (currentGen[i][j+1]) {
+        if (wrapOnEdges || (j < gridHeight - 1)) {
+            if (currentGen[i][jPlus1]) {
                 liveNeighbours++;
             }
         }
 
         // Check (+1, -1), (+1, 0), (+1, +1)
-        if (i < gridWidth - 1) {
-            if (j > 0) {
-                if (currentGen[i+1][j-1]) {
+        if (wrapOnEdges || (i < gridWidth - 1)) {
+            if (wrapOnEdges || (j > 0)) {
+                if (currentGen[iPlus1][jMinus1]) {
                     liveNeighbours++;
                 }
             }
-            if (currentGen[i+1][j]) {
+            if (currentGen[iPlus1][j]) {
                 liveNeighbours++;
             }
-            if (j < gridHeight - 1) {
-                if (currentGen[i+1][j+1]) {
+            if (wrapOnEdges || (j < gridHeight - 1)) {
+                if (currentGen[iPlus1][jPlus1]) {
                     liveNeighbours++;
                 }
             }
@@ -203,6 +210,10 @@ public class GameOfLifeMain extends Simulation {
 
     public void setDrawGridLines(boolean drawGridLines) {
         this.drawGridLines = drawGridLines;
+    }
+
+    public void setWrapOnEdges(boolean wrapOnEdges) {
+        this.wrapOnEdges = wrapOnEdges;
     }
 
     public static GameOfLifeMain getCurrInstance() {
