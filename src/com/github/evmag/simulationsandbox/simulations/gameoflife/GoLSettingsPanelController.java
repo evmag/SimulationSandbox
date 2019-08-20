@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Control;
+import javafx.scene.control.TextField;
 
 public class GoLSettingsPanelController {
     private GameOfLifeMain gameOfLifeMainSimulation;
@@ -18,6 +19,10 @@ public class GoLSettingsPanelController {
     private CheckBox drawGridLines;
     @FXML
     private CheckBox wrapOnEdges;
+    @FXML
+    private TextField numOfRows;
+    @FXML
+    private TextField numOfCols;
 
     @FXML
     private void initialize() {
@@ -48,5 +53,24 @@ public class GoLSettingsPanelController {
                 gameOfLifeMainSimulation.setWrapOnEdges(wrapOnEdges.isSelected());
                 break;
         }
+    }
+
+    @FXML
+    private void setGridDimensions() {
+        int defaultSize = 20; // TODO: make this a constant
+
+        int gridRows;
+        int gridCols;
+
+        try {
+            gridRows = Integer.parseInt(numOfRows.getText());
+            gridCols = Integer.parseInt(numOfCols.getText());
+        } catch (NumberFormatException e) {
+            gridRows = defaultSize;
+            gridCols = defaultSize;
+        }
+
+        gameOfLifeMainSimulation.setGridDimensions(gridRows, gridCols);
+
     }
 }

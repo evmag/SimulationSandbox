@@ -13,10 +13,10 @@
     <Label text="GoL settings"/>
     <GridPane vgap="10" hgap="10">
         <Label text="# of rows" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-        <TextField GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <TextField fx:id="numOfRows" GridPane.columnIndex="1" GridPane.rowIndex="0" onAction="#setGridDimensions"/>
 
         <Label text="# of colums" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <TextField fx:id="numOfCols" GridPane.columnIndex="1" GridPane.rowIndex="1" onAction="#setGridDimensions"/>
 
         <Label text="Cell color" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
         <ColorPicker fx:id="cellColor" GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#setColor"/>

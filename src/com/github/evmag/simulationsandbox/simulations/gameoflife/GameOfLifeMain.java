@@ -13,8 +13,10 @@ public class GameOfLifeMain extends Simulation {
     private final int GAP_FROM_EDGES = 10;
     private final SimulationCanvas simCanvas = SimulationCanvas.getInstance();
 
-    private final int gridWidth;
-    private final int gridHeight;
+    private int numGridCols;
+    private int numGridRows;
+    private int nextNumGridCols;
+    private int nextNumGridRows;
 
     private double cellSize;
     private boolean[][] currentGen;
@@ -25,9 +27,9 @@ public class GameOfLifeMain extends Simulation {
     private boolean wrapOnEdges = false;
     private boolean drawGridLines = true;
 
-    public GameOfLifeMain(int gridWidth, int gridHeight) {
-        this.gridWidth = gridWidth;
-        this.gridHeight = gridHeight;
+    public GameOfLifeMain(int numGridCols, int numGridRows) {
+        this.nextNumGridCols = numGridCols;
+        this.nextNumGridRows = numGridRows;
         gridColor = Color.BLACK;
         cellColor = Color.BLUE;
         currInstance = this;
@@ -35,14 +37,17 @@ public class GameOfLifeMain extends Simulation {
 
     @Override
     public void initialize() {
+        numGridCols = nextNumGridCols;
+        numGridRows = nextNumGridRows;
+
         // Set cell size to cover one canvas dimension
-        double maxCellSizeInX = (simCanvas.getWidth() - 2 * GAP_FROM_EDGES) / gridWidth;
-        double maxCellSizeInY = (simCanvas.getHeight() - 2 * GAP_FROM_EDGES) / gridHeight;
+        double maxCellSizeInX = (simCanvas.getWidth() - 2 * GAP_FROM_EDGES) / numGridCols;
+        double maxCellSizeInY = (simCanvas.getHeight() - 2 * GAP_FROM_EDGES) / numGridRows;
         cellSize = Math.min(maxCellSizeInX, maxCellSizeInY);
 
         // Init cell arrays
-        currentGen = new boolean[gridWidth][gridHeight];
-        nextGen = new boolean[gridWidth][gridHeight];
+        currentGen = new boolean[numGridCols][numGridRows];
+        nextGen = new boolean[numGridCols][numGridRows];
         initRandomCells();
 //        initDebugCells();
     }
@@ -52,18 +57,18 @@ public class GameOfLifeMain extends Simulation {
         simCanvas.setStrokeColor(gridColor);
         // Draw vertical lines
         double y1 = GAP_FROM_EDGES;
-        double y2 = y1 + gridHeight * cellSize;
+        double y2 = y1 + numGridRows * cellSize;
         double x;
-        for (int i = 0; i <= gridWidth; i++) {
+        for (int i = 0; i <= numGridCols; i++) {
             x = GAP_FROM_EDGES + i * cellSize;
             simCanvas.drawLine(x, y1, x, y2);
         }
 
         // Draw horizontal lines
         double x1 = GAP_FROM_EDGES;
-        double x2 = x1 + gridWidth * cellSize;
+        double x2 = x1 + numGridCols * cellSize;
         double y;
-        for (int i = 0; i <= gridHeight; i++) {
+        for (int i = 0; i <= numGridRows; i++) {
             y = GAP_FROM_EDGES + i * cellSize;
             simCanvas.drawLine(x1, y, x2, y);
         }
@@ -76,8 +81,8 @@ public class GameOfLifeMain extends Simulation {
         double yStart = GAP_FROM_EDGES;
         double x, y;
 
-        for (int i = 0; i < gridWidth; i++) {
-            for (int j = 0; j < gridHeight; j++) {
+        for (int i = 0; i < numGridCols; i++) {
+            for (int j = 0; j < numGridRows; j++) {
                 if (currentGen[i][j]) {
                     x = xStart + i * cellSize;
                     y = yStart + j * cellSize;
@@ -89,15 +94,15 @@ public class GameOfLifeMain extends Simulation {
 
     private void initRandomCells() {
         Random random = new Random();
-        for (int i = 0; i < gridWidth; i++) {
-            for (int j = 0; j < gridHeight; j++) {
+        for (int i = 0; i < numGridCols; i++) {
+            for (int j = 0; j < numGridRows; j++) {
                 currentGen[i][j] = random.nextBoolean();
             }
         }
     }
 
     private void initDebugCells() {
-        if ((gridWidth < 10) || (gridHeight < 10)) {
+        if ((numGridCols < 10) || (numGridRows < 10)) {
             System.out.println("Grid too small for debug configuration!");
             return;
         }
@@ -120,8 +125,8 @@ public class GameOfLifeMain extends Simulation {
 //              - Any live cell with two or three live neighbours lives on to the next generation.
 //              - Any live cell with more than three live neighbours dies, as if by overpopulation.
 //              - Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-        for (int i = 0; i < gridWidth; i++) {
-            for (int j = 0; j < gridHeight; j++) {
+        for (int i = 0; i < numGridCols; i++) {
+            for (int j = 0; j < numGridRows; j++) {
                 int liveNeighbours = getLiveNeighbours(i, j);
                 if (liveNeighbours < 2 || liveNeighbours > 3) {
                     nextGen[i][j] = false;
@@ -145,10 +150,10 @@ public class GameOfLifeMain extends Simulation {
         // TODO: Create unit test
         int liveNeighbours = 0;
 
-        int iMinus1 = (i > 0) ? i - 1 : gridWidth - 1;
-        int iPlus1 = (i < gridWidth - 1) ? i + 1 : 0;
-        int jMinus1 = (j > 0) ? j - 1 : gridWidth - 1;
-        int jPlus1 = (j < gridWidth - 1) ? j + 1 : 0;
+        int iMinus1 = (i > 0) ? i - 1 : numGridCols - 1;
+        int iPlus1 = (i < numGridCols - 1) ? i + 1 : 0;
+        int jMinus1 = (j > 0) ? j - 1 : numGridCols - 1;
+        int jPlus1 = (j < numGridCols - 1) ? j + 1 : 0;
 
         // Check 8 neighbours
         // Check (-1, -1), (-1, 0), (-1, +1)
@@ -161,7 +166,7 @@ public class GameOfLifeMain extends Simulation {
             if (currentGen[iMinus1][j]) {
                 liveNeighbours++;
             }
-            if (wrapOnEdges || (j < gridHeight - 1)) {
+            if (wrapOnEdges || (j < numGridRows - 1)) {
                 if (currentGen[iMinus1][jPlus1]) {
                     liveNeighbours++;
                 }
@@ -174,14 +179,14 @@ public class GameOfLifeMain extends Simulation {
                 liveNeighbours++;
             }
         }
-        if (wrapOnEdges || (j < gridHeight - 1)) {
+        if (wrapOnEdges || (j < numGridRows - 1)) {
             if (currentGen[i][jPlus1]) {
                 liveNeighbours++;
             }
         }
 
         // Check (+1, -1), (+1, 0), (+1, +1)
-        if (wrapOnEdges || (i < gridWidth - 1)) {
+        if (wrapOnEdges || (i < numGridCols - 1)) {
             if (wrapOnEdges || (j > 0)) {
                 if (currentGen[iPlus1][jMinus1]) {
                     liveNeighbours++;
@@ -190,7 +195,7 @@ public class GameOfLifeMain extends Simulation {
             if (currentGen[iPlus1][j]) {
                 liveNeighbours++;
             }
-            if (wrapOnEdges || (j < gridHeight - 1)) {
+            if (wrapOnEdges || (j < numGridRows - 1)) {
                 if (currentGen[iPlus1][jPlus1]) {
                     liveNeighbours++;
                 }
@@ -214,6 +219,11 @@ public class GameOfLifeMain extends Simulation {
 
     public void setWrapOnEdges(boolean wrapOnEdges) {
         this.wrapOnEdges = wrapOnEdges;
+    }
+
+    public void setGridDimensions(int numGridCols, int numGridRows) {
+        this.nextNumGridCols = numGridCols;
+        this.nextNumGridRows = numGridRows;
     }
 
     public static GameOfLifeMain getCurrInstance() {
