@@ -1,6 +1,8 @@
 package com.github.evmag.simulationsandbox.simulations.gameoflife;
 
 import com.github.evmag.simulationsandbox.simulations.gameoflife.GameOfLifeMain;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -27,6 +29,18 @@ public class GoLSettingsPanelController {
     @FXML
     private void initialize() {
         gameOfLifeMainSimulation = GameOfLifeMain.getCurrInstance();
+        numOfRows.focusedProperty().addListener((ov, oldValue, newValue) -> {
+            if (!newValue) {
+                setGridDimensions();
+            }
+        });
+        numOfCols.focusedProperty().addListener((ov, oldValue, newValue) -> {
+            if (!newValue) {
+                setGridDimensions();
+            }
+        });
+        setGridDimensions();
+
     }
 
     @FXML
@@ -57,20 +71,23 @@ public class GoLSettingsPanelController {
 
     @FXML
     private void setGridDimensions() {
-        int defaultSize = 20; // TODO: make this a constant
+        int gridRows = GameOfLifeConstants.DEFAULT_GRID_SIZE;
+        int gridCols = GameOfLifeConstants.DEFAULT_GRID_SIZE;
 
-        int gridRows;
-        int gridCols;
-
-        try {
+        if (GameOfLifeConstants.GRID_SIZE_INTEGER_PATTERN.matcher(numOfRows.getCharacters()).matches()) {
             gridRows = Integer.parseInt(numOfRows.getText());
-            gridCols = Integer.parseInt(numOfCols.getText());
-        } catch (NumberFormatException e) {
-            gridRows = defaultSize;
-            gridCols = defaultSize;
+            gridRows = Math.max(gridRows, GameOfLifeConstants.MIN_GRID_SIZE);
+            gridRows = Math.min(gridRows, GameOfLifeConstants.MAX_GRID_SIZE);
         }
+        numOfRows.setText(String.valueOf(gridRows));
+
+        if (GameOfLifeConstants.GRID_SIZE_INTEGER_PATTERN.matcher(numOfCols.getCharacters()).matches()) {
+            gridCols = Integer.parseInt(numOfCols.getText());
+            gridCols = Math.max(gridCols, GameOfLifeConstants.MIN_GRID_SIZE);
+            gridCols = Math.min(gridCols, GameOfLifeConstants.MAX_GRID_SIZE);
+        }
+        numOfCols.setText(String.valueOf(gridCols));
 
         gameOfLifeMainSimulation.setGridDimensions(gridRows, gridCols);
-
     }
 }
