@@ -39,8 +39,7 @@ public class GoLSettingsPanelController {
                 setGridDimensions();
             }
         });
-        setGridDimensions();
-
+        setDefaultSettingsValues();
     }
 
     @FXML
@@ -89,5 +88,12 @@ public class GoLSettingsPanelController {
         numOfCols.setText(String.valueOf(gridCols));
 
         gameOfLifeMainSimulation.setGridDimensions(gridRows, gridCols);
+    }
+
+    private void setDefaultSettingsValues() {
+        numOfCols.setText(String.valueOf(GameOfLifeConstants.DEFAULT_GRID_SIZE));
+        numOfRows.setText(String.valueOf(GameOfLifeConstants.DEFAULT_GRID_SIZE));
+        cellColor.setValue(GameOfLifeConstants.DEFAULT_CELL_COLOR);
+        gridColor.setValue(GameOfLifeConstants.DEFAULT_GRID_LINE_COLOR);
     }
 }

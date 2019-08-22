@@ -30,8 +30,8 @@ public class GameOfLifeMain extends Simulation {
     public GameOfLifeMain(int numGridCols, int numGridRows) {
         this.nextNumGridCols = numGridCols;
         this.nextNumGridRows = numGridRows;
-        gridColor = Color.BLACK;
-        cellColor = Color.BLUE;
+        gridColor = GameOfLifeConstants.DEFAULT_GRID_LINE_COLOR;
+        cellColor = GameOfLifeConstants.DEFAULT_CELL_COLOR;
         currInstance = this;
     }
 
