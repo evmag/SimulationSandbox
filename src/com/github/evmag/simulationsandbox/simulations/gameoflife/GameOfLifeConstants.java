@@ -10,5 +10,6 @@ class GameOfLifeConstants {
     static final int MAX_GRID_SIZE = 500;
     static final Pattern GRID_SIZE_INTEGER_PATTERN = Pattern.compile("\\d{1,6}");
     static final Color DEFAULT_CELL_COLOR = Color.BLUE;
+    static final Color DEFAULT_BACKGROUND_COLOR = Color.LIGHTGRAY;
     static final Color DEFAULT_GRID_LINE_COLOR = Color.BLACK;
 }

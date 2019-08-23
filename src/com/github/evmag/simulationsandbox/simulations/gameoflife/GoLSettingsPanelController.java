@@ -16,6 +16,8 @@ public class GoLSettingsPanelController {
     @FXML
     private ColorPicker cellColor;
     @FXML
+    private ColorPicker backgroundColor;
+    @FXML
     private ColorPicker gridColor;
     @FXML
     private CheckBox drawGridLines;
@@ -48,6 +50,9 @@ public class GoLSettingsPanelController {
         switch (source.getId()) {
             case "cellColor" :
                 gameOfLifeMainSimulation.setCellColor(cellColor.getValue());
+                break;
+            case "backgroundColor" :
+                gameOfLifeMainSimulation.setBackgroundColor(backgroundColor.getValue());
                 break;
             case "gridColor" :
                 gameOfLifeMainSimulation.setGridColor(gridColor.getValue());
@@ -94,6 +99,7 @@ public class GoLSettingsPanelController {
         numOfCols.setText(String.valueOf(GameOfLifeConstants.DEFAULT_GRID_SIZE));
         numOfRows.setText(String.valueOf(GameOfLifeConstants.DEFAULT_GRID_SIZE));
         cellColor.setValue(GameOfLifeConstants.DEFAULT_CELL_COLOR);
+        backgroundColor.setValue(GameOfLifeConstants.DEFAULT_BACKGROUND_COLOR);
         gridColor.setValue(GameOfLifeConstants.DEFAULT_GRID_LINE_COLOR);
     }
 }

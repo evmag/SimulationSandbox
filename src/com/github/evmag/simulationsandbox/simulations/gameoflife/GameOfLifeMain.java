@@ -24,6 +24,7 @@ public class GameOfLifeMain extends Simulation {
 
     private Color gridColor;
     private Color cellColor;
+    private Color backgroundColor;
     private boolean wrapOnEdges = false;
     private boolean drawGridLines = true;
 
@@ -32,6 +33,7 @@ public class GameOfLifeMain extends Simulation {
         this.nextNumGridRows = numGridRows;
         gridColor = GameOfLifeConstants.DEFAULT_GRID_LINE_COLOR;
         cellColor = GameOfLifeConstants.DEFAULT_CELL_COLOR;
+        backgroundColor = GameOfLifeConstants.DEFAULT_BACKGROUND_COLOR;
         currInstance = this;
     }
 
@@ -217,6 +219,10 @@ public class GameOfLifeMain extends Simulation {
         this.drawGridLines = drawGridLines;
     }
 
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
     public void setWrapOnEdges(boolean wrapOnEdges) {
         this.wrapOnEdges = wrapOnEdges;
     }
@@ -238,7 +244,7 @@ public class GameOfLifeMain extends Simulation {
 
     @Override
     public void render() {
-//        simCanvas.clear(Color.LIGHTGRAY);
+        simCanvas.clear(backgroundColor);
         drawCells();
         if (drawGridLines) {
             drawGridLines();

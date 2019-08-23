@@ -21,12 +21,15 @@
         <Label text="Cell color" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
         <ColorPicker fx:id="cellColor" GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#setColor"/>
 
-        <Label text="Grid lines color" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-        <ColorPicker fx:id="gridColor" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#setColor"/>
+        <Label text="Background" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <ColorPicker fx:id="backgroundColor" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#setColor"/>
 
-        <CheckBox fx:id="wrapOnEdges" text="Wrap on edges" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2"/>
+        <Label text="Grid lines color" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <ColorPicker fx:id="gridColor" GridPane.columnIndex="1" GridPane.rowIndex="4" onAction="#setColor"/>
 
-        <CheckBox fx:id="drawGridLines" text="Draw grid lines" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2" selected="true" onAction="#setBooleanSettings"/>
+        <CheckBox fx:id="wrapOnEdges" text="Wrap on edges" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
+
+        <CheckBox fx:id="drawGridLines" text="Draw grid lines" GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="2" selected="true" onAction="#setBooleanSettings"/>
     </GridPane>
 
 </VBox>

@@ -83,7 +83,7 @@ public class SimulationThread extends Thread implements Runnable{
 
     private void render() {
         Platform.runLater(() -> {
-            SimulationCanvas.getInstance().clear(Color.LIGHTGRAY);
+//            SimulationCanvas.getInstance().clear(Color.LIGHTGRAY);
             simulation.render();
         });
     }
