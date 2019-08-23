@@ -2,10 +2,6 @@ package com.github.evmag.simulationsandbox;
 
 import com.github.evmag.simulationsandbox.simulations.Simulation;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.paint.Color;
-
-import java.net.URL;
 
 public class SimulationThread extends Thread implements Runnable{
     private boolean running;

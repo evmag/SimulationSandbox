@@ -1,8 +1,5 @@
 package com.github.evmag.simulationsandbox.simulations.gameoflife;
 
-import com.github.evmag.simulationsandbox.simulations.gameoflife.GameOfLifeMain;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
